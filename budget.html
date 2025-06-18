@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>sugar & cents ˙ᵕ˙ </title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <h1>♡ Budget & Savings Planner</h1>
+
+    <button id="themeToggle"> ੈ♡‧₊˚ Toggle Theme</button>
+
+    <form id="budgetForm">
+      <label>Monthly Income:</label>
+      <input type="number" id="income" required>
+
+      <label>Monthly Expenses:</label>
+      <input type="number" id="expenses" required>
+
+      <label>Savings Goal Amount:</label>
+      <input type="number" id="goalAmount" required>
+
+      <label>Months to Reach Goal:</label>
+      <input type="number" id="goalMonths" required>
+
+      <label>Item Name:</label>
+      <input type="text" id="itemName" required>
+
+      <label>Item Cost:</label>
+      <input type="number" id="itemCost" required>
+
+      <label>Category:</label>
+      <select id="itemType">
+        <option value="need">Need</option>
+        <option value="want">Want</option>
+      </select>
+
+      <button type="submit">Can I Afford This?</button>
+    </form>
+
+    <div id="result"></div>
+
+    <h2>ღ Savings Progress</h2>
+    <progress id="savingsBar" value="0" max="100"></progress>
+
+    <h2>✩ Past Checks</h2>
+    <ul id="history"></ul>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

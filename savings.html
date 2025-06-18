@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>❀ Savings Tracker</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Quicksand', sans-serif;
+      background-color: #fff0f5;
+      color: #333;
+      padding: 2rem;
+      text-align: centre;
+    }
+    input, button {
+      margin: 0.5rem;
+      padding: 0.5rem;
+      border-radius: 1rem;
+      border: 1px solid #ccc;
+    }
+    progress {
+      width: 80%;
+      height: 30px;
+    }
+    .log {
+      margin-top: 1.5rem;
+      text-align: left;
+      max-width: 400px;
+      margin-inline: auto;
+    }
+  </style>
+</head>
+<body>
+  <h1>♡ Savings Tracker</h1>
+
+  <p>Goal Amount: $<span id="goalDisplay">5000</span></p>
+  <p>Total Saved: $<span id="savedDisplay">0</span></p>
+
+  <progress id="savingsProgress" value="0" max="100"></progress><br>
+
+  <input type="number" id="addAmount" placeholder="Enter amount to save">
+  <button onclick="addSavings()">Add</button>
+
+  <div class="log">
+    <h3>✩ History</h3>
+    <ul id="savingsLog"></ul>
+  </div>
+
+  <script>
+    let goal = 5000;
+    let saved = parseFloat(localStorage.getItem('totalSaved')) || 0;
+    let log = JSON.parse(localStorage.getItem('savingsLog')) || [];
+
+    document.getElementById('goalDisplay').innerText = goal;
+    document.getElementById('savedDisplay').innerText = saved;
+    document.getElementById('savingsProgress').value = (saved / goal) * 100;
+
+    function addSavings() {
+      const amount = parseFloat(document.getElementById('addAmount').value);
+      if (!isNaN(amount) && amount > 0) {
+        saved += amount;
+        log.push(`+ $${amount} added on ${new Date().toLocaleDateString()}`);
+        localStorage.setItem('totalSaved', saved);
+        localStorage.setItem('savingsLog', JSON.stringify(log));
+        updateDisplay();
+      }
+    }
+
+    function updateDisplay() {
+      document.getElementById('savedDisplay').innerText = saved.toFixed(2);
+      document.getElementById('savingsProgress').value = (saved / goal) * 100;
+      document.getElementById('savingsLog').innerHTML = log.map(item => `<li>${item}</li>`).join('');
+    }
+
+    updateDisplay();
+  </script>
+</body>
+</html>
